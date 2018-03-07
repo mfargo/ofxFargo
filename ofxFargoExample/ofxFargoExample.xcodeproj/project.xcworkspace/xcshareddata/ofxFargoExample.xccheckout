@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FFE632E1-52D8-47B2-A318-C0891363CAEE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ofxFargoExample</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>15C94BBCFDEFA1A681D6A7036588EBAEFDE285C4</key>
+		<string>https://github.com/mfargo/ofxParty.git</string>
+		<key>703DCF15BBF5318F63B5A515B94336085A2E6037</key>
+		<string>https://github.com/companje/ofxFTGL.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ofxFargoExample/ofxFargoExample.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>15C94BBCFDEFA1A681D6A7036588EBAEFDE285C4</key>
+		<string>../../..</string>
+		<key>703DCF15BBF5318F63B5A515B94336085A2E6037</key>
+		<string>../../../../ofxFTGL</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mfargo/ofxParty.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>15C94BBCFDEFA1A681D6A7036588EBAEFDE285C4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>15C94BBCFDEFA1A681D6A7036588EBAEFDE285C4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxFargo</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>703DCF15BBF5318F63B5A515B94336085A2E6037</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxFTGL</string>
+		</dict>
+	</array>
+</dict>
+</plist>
