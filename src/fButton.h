@@ -22,8 +22,6 @@ public:
     fButton(ofColor backgroundColor=ofColor(), float cornerRadius = 8);
     virtual ~fButton();
 
-    ofEvent<fSpriteEvent>    BUTTON_DOWN;
-    ofEvent<fSpriteEvent>    BUTTON_UP;
 
     fButtonState    getState() { return _state; }
     ofColor &       getBackgroundColor() { return _backgroundColor; }
@@ -34,8 +32,9 @@ public:
     
 protected:
     virtual void    onDown();
-    virtual void    onUp();
+    virtual void    onUp(float totalDrag);
     virtual void    onDraw();
+
     
     fButtonState    _state;
     ofColor         _backgroundColor;

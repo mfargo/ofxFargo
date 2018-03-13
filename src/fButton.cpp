@@ -18,15 +18,12 @@ fButton::fButton(ofColor backgroundColor, float cornerRadius) {
 fButton::~fButton() {}
 
 void fButton::onDown() {
-    fSpriteEvent e = fSpriteEvent(this);
-    ofNotifyEvent(this->BUTTON_DOWN, e, this);
     opacity = 0.5;
 }
-void fButton::onUp() {
-    fSpriteEvent e = fSpriteEvent(this);
-    ofNotifyEvent(this->BUTTON_UP, e, this);
+void fButton::onUp(float totalDrag) {
     opacity = 1;
 }
+
 
 void fButton::onDraw() {
     ofSetColor(_backgroundColor, getCollectiveOpacity()*255.f);

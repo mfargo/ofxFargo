@@ -22,7 +22,7 @@ public:
     
 protected:
     virtual void    onDown();
-    virtual void    onUp();
+    virtual void    onUp(float totalDrag);
     void            onDraw();
     
     fTextField *    _textField;

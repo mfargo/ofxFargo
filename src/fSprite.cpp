@@ -53,6 +53,7 @@ void fSprite::draw() {
 	ofSetColor(255, 255, 255, collectiveOpacity*255.f);
 	ofPushMatrix();
 	ofTranslate(position);
+
     ofRotateX(rotation.x);
 	ofRotateY(rotation.y);
     ofRotateZ(rotation.z);
@@ -80,9 +81,12 @@ fSprite *fSprite::processTouchDown(int touchID, const ofVec2f &globalPoint) {
     else {
         touchVelocity = ofVec2f(0, 0);
         totalDrag = 0.f;
+        
         touchPoint = localPoint;
         globalTouchPoint = globalPoint;
         dragging = true;
+        fSpriteEvent e = fSpriteEvent(this);
+        ofNotifyEvent(this->TOUCH_DOWN, e, this);
         this->onDown();
         return this;
     }
@@ -96,23 +100,28 @@ void fSprite::processTouchMove(int touchID, const ofVec2f &globalPoint) {
     if (draggable) {
         position += touchVelocity;
     }
+    fSpriteEvent e = fSpriteEvent(this, touchVelocity);
+    ofNotifyEvent(this->TOUCH_MOVE, e, this);
     this->onMove(touchVelocity);
 }
 
 void fSprite::processTouchUp(int touchID, const ofVec2f &globalPoint) {
     dragging = false;
     this->onUp(totalDrag);
+    fSpriteEvent e = fSpriteEvent(this);
+    ofNotifyEvent(this->TOUCH_UP, e, this);
     totalDrag = 0;
 }
 
-ofVec3f fSprite::globalToLocal(const ofVec3f &globalPoint) {
+ofVec3f fSprite::globalToLocal(const ofVec3f globalPoint) {
 	ofMatrix4x4 curTransform, invTransform;
 	fSprite *curParent = this;
 	while (curParent != NULL) {
 		curTransform.postMultTranslate(-curParent->size.x * 0.5, -curParent->size.y * 0.5, 0.0);
 		curTransform.postMultScale(curParent->scale, curParent->scale, 1.0);
-        curTransform.postMultRotate(ofQuaternion(curParent->rotation.x, curParent->rotation.y, curParent->rotation.z, 0));
-		//curTransform.postMultRotate(curParent->rotation, 0.0, 0.0, 1.0);
+        ofVec3f radRot = curParent->rotation * (M_PI/180.f);
+        //curTransform.postMultRotate(ofQuaternion(radRot.x, radRot.y, radRot.z, 0));
+        curTransform.postMultRotate(curParent->rotation.z, 0.f, 0.f, 1.f);
 		curTransform.postMultTranslate(curParent->position.x, curParent->position.y, 0.0);
 		curParent = curParent->parent;
 	}
@@ -121,14 +130,15 @@ ofVec3f fSprite::globalToLocal(const ofVec3f &globalPoint) {
 	return ofVec3f(globalPoint) * invTransform;
 }
 
-ofVec3f fSprite::localToGlobal(const ofVec3f &localPoint) {
+ofVec3f fSprite::localToGlobal(const ofVec3f localPoint) {
 	ofMatrix4x4 curTransform;
 	fSprite *curParent = this;
 	while (curParent != NULL) {
 		curTransform.postMultTranslate(-curParent->size.x * 0.5, -curParent->size.y * 0.5, 0.0);
 		curTransform.postMultScale(curParent->scale, curParent->scale, 1.0);
-        curTransform.postMultRotate(ofQuaternion(curParent->rotation.x, curParent->rotation.y, curParent->rotation.z, 0));
-		//curTransform.postMultRotate(curParent->rotation, 0.0, 0.0, 1.0);
+        ofVec3f radRot = curParent->rotation * (M_PI/180.f);
+        //curTransform.postMultRotate(ofQuaternion(radRot.x, radRot.y, radRot.z, 0));
+		curTransform.postMultRotate(curParent->rotation.z, 0.0, 0.0, 1.0);
 		curTransform.postMultTranslate(curParent->position.x, curParent->position.y, 0.0);
 		curParent = curParent->parent;
 	}

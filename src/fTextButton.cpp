@@ -28,8 +28,8 @@ void fTextButton::onDown() {
     _textField->textColor = _backgroundColor;
     _backgroundColor = c;
 }
-void fTextButton::onUp() {
-    fButton::onUp();
+void fTextButton::onUp(float totalDrag) {
+    fButton::onUp(totalDrag);
     ofColor c = _textField->textColor;
     _textField->textColor = _backgroundColor;
     _backgroundColor = c;

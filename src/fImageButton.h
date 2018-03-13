@@ -6,7 +6,7 @@
 //
 
 #ifndef fImageButton_h
-#define fImageButton_hpp
+#define fImageButton_h
 
 #include "fButton.h"
 

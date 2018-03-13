@@ -14,6 +14,7 @@
 class fImage : public fSprite {
 public:
     fImage(string url);
+    fImage(ofImage & image);
     fImage();
     virtual ~fImage();
     

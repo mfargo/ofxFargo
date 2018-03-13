@@ -7,11 +7,17 @@
 //
 
 #include "fImage.h"
-
 fImage::fImage() {}
 fImage::fImage(string url) {
     _load(url);
 }
+fImage::fImage(ofImage & image) {
+    this->image = image;
+    size.x = image.getWidth();
+    size.y = image.getHeight();
+    _url = "";
+}
+
 fImage::~fImage() {
     image.clear();
 }

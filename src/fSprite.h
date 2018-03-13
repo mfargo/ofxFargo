@@ -32,8 +32,9 @@ public:
     float           getWidth() { return size.x; }
 	float           getHeight() { return size.y; }
     float           getCollectiveOpacity() { return collectiveOpacity; }
-    
-    
+    ofVec2f         getGlobalTouchPoint() { return globalTouchPoint; }
+    ofVec2f         getTouchPoint() { return touchPoint; }
+
 	ofVec2f         size;
 	ofVec3f         position;
 	ofVec3f         rotation;
@@ -42,8 +43,8 @@ public:
 	float           touchPadding;
     bool            draggable;
 	fSprite *       parent;
-    ofVec3f         globalToLocal(const ofVec3f &globalPoint);
-	ofVec3f         localToGlobal(const ofVec3f &localPoint);
+    ofVec3f         globalToLocal(const ofVec3f globalPoint);
+	ofVec3f         localToGlobal(const ofVec3f localPoint);
     ofVec2f         scaledSize();
     
     // Animations
@@ -55,6 +56,9 @@ public:
     void            stopRotationAnimation();
     void            stopAllAnimations();
     
+    ofEvent<fSpriteEvent>    TOUCH_DOWN;
+    ofEvent<fSpriteEvent>    TOUCH_UP;
+    ofEvent<fSpriteEvent>    TOUCH_MOVE;
     ofEvent<fSpriteEvent>    ANIMATION_POSITION_COMPLETE;
     ofEvent<fSpriteEvent>    ANIMATION_ROTATION_COMPLETE;
     ofEvent<fSpriteEvent>    ANIMATION_SCALE_COMPLETE;

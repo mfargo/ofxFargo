@@ -16,15 +16,19 @@ class fSprite;
 
 class fSpriteEvent : public ofEventArgs {
 public:
-    fSpriteEvent(fSprite * target) {
+    fSpriteEvent(fSprite * target, ofVec3f velocity=ofVec3f()) {
         _target = target;
+        _velocity = velocity;
     }
     
     fSprite *   getTarget() { return _target; }
-    
+    ofVec3f     getVelocity() { return _velocity; }
+
 private:
     
     fSprite *   _target;
+    ofVec3f     _velocity;
+    
 };
 
 #endif /* defined(__ofxFargo__fSpriteEvent__) */
