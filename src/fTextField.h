@@ -38,10 +38,9 @@ public:
     float               getMaxWidth() { return _maxWidth; }
     void                setLineHeight(float lineHeight) { _lineHeight = lineHeight; }
     float               getLineHeight() { return _lineHeight; }
-    void                setDropShadow(bool dropShadow) { _dropShadow = dropShadow; }
+    float               getFontSize() { return _fontSize; }
 
 protected:
-    void                drawLines();
 
 private:
     
@@ -51,8 +50,7 @@ private:
     float               _fontSize;
     float               _maxWidth;
     float               _lineHeight;
-    bool                _dropShadow;
-    ofFbo               _fbo;
+    ofRectangle         _textBounds;
 
 };
 

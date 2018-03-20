@@ -27,7 +27,7 @@ public:
     fSprite *           removeChild(fSprite * child);
     void                moveChildToTop(fSprite * child);
 
-	bool                enabled;
+	bool                touchEnabled;
     bool                visible;
     string              name;   // for debugging purposes
 

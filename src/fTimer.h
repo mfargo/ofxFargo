@@ -39,7 +39,8 @@ public:
     bool    isRunning() { return _isRunning; }
     void    setSeconds(float seconds) { _millis = seconds * 1000.f; }
     float   getSeconds() { return _millis/1000.f; }
-    
+    float   getProgress() { return ofClamp(((float)ofGetElapsedTimeMillis() - _startMillis)/_millis, 0, 1); }
+
 private:
     
     void    _update(ofEventArgs & e);
@@ -47,6 +48,7 @@ private:
     float   _startMillis;
     float   _millis;
     bool    _isRunning;
+
 };
 
 #endif /* defined(__ofxFargo__fTimer__) */

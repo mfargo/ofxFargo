@@ -15,9 +15,10 @@ fTextField::fTextField(string text, int fontSize, string fontUrl, float maxWidth
     _fontSize = fontSize;
     _maxWidth = maxWidth;
     _lineHeight = fontSize * 0.3f;
-    _dropShadow = false;
+    touchEnabled = false;
     setText(text);
     textAlign = F_ALIGN_LEFT;
+
 }
 fTextField::fTextField(string text, ofxFontStash * font) {
     _font = *font;
@@ -34,37 +35,28 @@ void fTextField::onDraw() {
         //printf(" \n ** fTextField-> EMPTY TEXT!\n");
         return;
     }
-    if (_dropShadow) {
-        ofSetColor(0, 0, 0, collectiveOpacity*140.f);
-        ofPushMatrix();
-        ofTranslate(-2, 2);
-        drawLines();
-        ofPopMatrix();
-    }
-    ofSetColor(textColor, collectiveOpacity*255.f);
-    drawLines();
-}
+    ofPushMatrix(); {
+        int numLines = 0;
+        bool isCentered = (textAlign==F_ALIGN_CENTER);
+        
+        float x = (isCentered) ? 0.f : (textAlign==F_ALIGN_RIGHT) ? -size.x : size.x/2.f;
 
-void fTextField::drawLines() {
-    float y = 0;
-    _fbo.draw(0, 0);
+        ofTranslate(-_textBounds.x + x, -_textBounds.y);
+        
+        
+        bool wasCropped;
+        ofSetColor(textColor);
+        _textBounds = _font.drawMultiLineColumn(_text, _fontSize, 0, 0, _maxWidth, numLines);
+        //_textBounds = _font.drawMultiLineColumn(_text, _fontSize, 0, 0, _maxWidth, numLines, true, 2, false, &wasCropped, isCentered);
+        size = ofVec2f(_textBounds.width, _textBounds.height);
+    } ofPopMatrix();
 }
 
 void fTextField::setText(string text)  {
-    if (!_fbo.isAllocated()) {
-        _fbo.allocate(ofGetWidth(), ofGetHeight());
-    }
-    int numLines = 0;
     _text = text;
-    ofRectangle r = _font.drawMultiLineColumn(_text, _fontSize, 0, 0, _maxWidth, numLines);
-
-    size = ofVec2f(r.width, r.height);
-    _fbo.begin();
-    ofClear(255,255,255, 0);
-    ofSetColor(255, 255, 255);
-    ofSetColor(textColor);
-    _font.drawMultiLineColumn(_text, _fontSize, size.y/2.f, size.y/2.f+_fontSize, _maxWidth, numLines);
-    _fbo.end();
+    int numLines = 0;
+    _textBounds = _font.drawMultiLineColumn(_text, _fontSize, 0, 0, _maxWidth, numLines);
+    size = ofVec2f(_textBounds.width, _textBounds.height);
 }
 
 

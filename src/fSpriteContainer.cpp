@@ -10,6 +10,7 @@
 
 fSpriteContainer::fSpriteContainer() {
     name = "fSpriteContainer";
+    touchEnabled = true;
 }
 fSpriteContainer::~fSpriteContainer() {
     children.clear();

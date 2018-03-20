@@ -17,11 +17,13 @@ fSprite::fSprite() {
 	touchPadding = 0.0;
 	opacity = 1.0;
     collectiveOpacity = opacity;
-	enabled = true;
+	touchEnabled = true;
     visible = true;
     dragging = false;
+    propogateTouches = true;
     draggable = false;
 	parent = NULL;
+
 }
 
 fSprite::~fSprite() {
@@ -70,11 +72,14 @@ void fSprite::draw() {
 
 
 fSprite *fSprite::processTouchDown(int touchID, const ofVec2f &globalPoint) {
-    if (!enabled) return NULL;
-    for (int i=children.size()-1; i>-1; i--) {
-		fSprite *sprite = children[i]->processTouchDown(touchID, globalPoint);
-        if (sprite) return sprite;
-	}
+    if (!visible) return NULL;
+    if (propogateTouches) {
+        for (int i=children.size()-1; i>-1; i--) {
+            fSprite *sprite = children[i]->processTouchDown(touchID, globalPoint);
+            if (sprite) return sprite;
+        }
+    }
+    if (!touchEnabled) return NULL;
     ofVec3f localPoint = globalToLocal(globalPoint);
     if (!containsLocalPoint(localPoint))
 		return NULL;
@@ -148,6 +153,14 @@ ofVec3f fSprite::localToGlobal(const ofVec3f localPoint) {
 
 ofVec2f fSprite::scaledSize() {
     return this->size * this->scale;
+}
+
+void fSprite::moveToTop() {
+    if (this->parent) {
+        fSpriteContainer * c = this->parent;
+        c->removeChild(this);
+        c->addChild(this);
+    }
 }
 
 void fSprite::animatePosition(ofVec3f point, float time, float delay, int easeType, bool notifyCompletion) {

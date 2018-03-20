@@ -17,13 +17,14 @@ fTimer::fTimer(float seconds, bool autoStart) {
     _isRunning = false;
     if (autoStart) start();
 }
-fTimer::~fTimer() {}
+fTimer::~fTimer() {
+    ofRemoveListener(ofEvents().update, this, &fTimer::_update);
+}
 
 
 void fTimer::_update(ofEventArgs & e) {
-    //printf(" TIMER UPDATE\n");
     if (!_isRunning) stop();
-    if (ofGetElapsedTimeMillis() >= _startMillis + _millis) _complete();
+    if (getProgress()>=1.f) _complete();
 }
         
 void fTimer::_complete() {

@@ -42,10 +42,13 @@ public:
 	float           scale;
 	float           touchPadding;
     bool            draggable;
+    bool            propogateTouches;
 	fSprite *       parent;
     ofVec3f         globalToLocal(const ofVec3f globalPoint);
 	ofVec3f         localToGlobal(const ofVec3f localPoint);
     ofVec2f         scaledSize();
+    
+    virtual void    moveToTop(); // if parented, make top child;
     
     // Animations
     void            animatePosition(ofVec3f point, float time, float delay=0.f, int easeType=5, bool notifyCompletion=true);

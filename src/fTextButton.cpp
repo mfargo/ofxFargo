@@ -16,7 +16,7 @@ fTextButton::fTextButton(string text, ofxFontStash * font, ofColor textColor, of
     size = _textField->size;
     size.x += _padding.y + _padding.w;
     size.y += _padding.x + _padding.z;
-    addChild(_textField)->enabled = false;
+    addChild(_textField)->touchEnabled = false;
     _textField->position = ofVec2f(size.x/2.f, size.y/2.f);
 }
 fTextButton::~fTextButton() {
